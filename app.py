@@ -172,7 +172,7 @@ def train_model(model, train_loader, val_loader, epochs, lr=0.001, patience=15):
         
         progress = (epoch + 1) / epochs
         progress_bar.progress(progress)
-        status_text.text(f"Epoch {epoch+1}/{epochs} — Train Loss: {train_loss:.6f} | Val Loss: {val_loss:.6f}")
+        status_text.text(f"Epoch {epoch+1}/{epochs} -- Train Loss: {train_loss:.6f} | Val Loss: {val_loss:.6f}")
         
         if val_loss < best_val_loss:
             best_val_loss = val_loss
@@ -181,7 +181,7 @@ def train_model(model, train_loader, val_loader, epochs, lr=0.001, patience=15):
         else:
             patience_counter += 1
             if patience_counter >= patience:
-                status_text.text(f"⚡ Early stopping triggered at epoch {epoch+1}")
+                status_text.text(f"Early stopping triggered at epoch {epoch+1}")
                 break
     
     progress_bar.empty()
@@ -263,25 +263,25 @@ def generate_forex_insights(model_name, pair_name, metrics, indicators, future_p
         perf_desc = f"Model {model_name} menunjukkan MAPE tinggi ({mape:.2f}%). Pasar forex sangat volatile, pertimbangkan faktor fundamental."
     
     insights.append({
-        'title': f'📊 Kualitas Model: {perf_rating}',
-        'content': perf_desc + f"<br><br>R-squared: <b>{r2:.4f}</b> — {'model dapat menjelaskan ' + str(int(r2*100)) + '% variasi harga' if r2 > 0 else 'model tidak lebih baik dari prediksi rata-rata'}.",
+        'title': f'Kualitas Model: {perf_rating}',
+        'content': perf_desc + f"<br><br>R-squared: <b>{r2:.4f}</b> -- {'model dapat menjelaskan ' + str(int(r2*100)) + '% variasi harga' if r2 > 0 else 'model tidak lebih baik dari prediksi rata-rata'}.",
         'variant': perf_class
     })
     
     # Current Position
     pos = indicators['price_position']
     if pos > 70:
-        position_desc = f"{pair_name} di <b>{pos:.0f}% dari range 30 hari</b> — mendekati <b>RESISTANCE</b> di {symbol}{indicators['resistance_30d']:,.2f}. Waspada potensi reversal."
+        position_desc = f"{pair_name} di <b>{pos:.0f}% dari range 30 hari</b> -- mendekati <b>RESISTANCE</b> di {symbol}{indicators['resistance_30d']:,.2f}. Waspada potensi reversal."
         position_class = "warning"
     elif pos < 30:
-        position_desc = f"{pair_name} di <b>{pos:.0f}% dari range 30 hari</b> — mendekati <b>SUPPORT</b> di {symbol}{indicators['support_30d']:,.2f}. Potensi rebound jika support bertahan."
+        position_desc = f"{pair_name} di <b>{pos:.0f}% dari range 30 hari</b> -- mendekati <b>SUPPORT</b> di {symbol}{indicators['support_30d']:,.2f}. Potensi rebound jika support bertahan."
         position_class = "positive"
     else:
         position_desc = f"{pair_name} di <b>mid-range</b> ({pos:.0f}%), support {symbol}{indicators['support_30d']:,.2f}, resistance {symbol}{indicators['resistance_30d']:,.2f}."
         position_class = "default"
     
     insights.append({
-        'title': '📍 Posisi Harga Terkini',
+        'title': 'Posisi Harga Terkini',
         'content': position_desc + f"<br><br>Range harian rata-rata: <b>{symbol}{indicators['avg_daily_range']:,.2f}</b> ({indicators['avg_daily_range']/indicators['current_price']*100:.2f}% dari harga)",
         'variant': position_class
     })
@@ -307,7 +307,7 @@ def generate_forex_insights(model_name, pair_name, metrics, indicators, future_p
         trend_class = "default"
     
     insights.append({
-        'title': '📈 Analisis Tren',
+        'title': 'Analisis Tren',
         'content': trend_desc + f"<br><br>MA20: {symbol}{indicators['ma_20']:,.2f} | MA50: {symbol}{indicators['ma_50']:,.2f}" + 
                   (f" | MA200: {symbol}{indicators['ma_200']:,.2f}" if indicators['ma_200'] else ""),
         'variant': trend_class
@@ -318,7 +318,7 @@ def generate_forex_insights(model_name, pair_name, metrics, indicators, future_p
     vol_60 = indicators['volatility_60d']
     
     if vol_20 > 1:
-        vol_desc = f"<b>VOLATILITAS TINGGI</b>: {vol_20:.2f}% (20-hari). Pasar forex sedang sangat dinamis — pergerakan besar mungkin terjadi."
+        vol_desc = f"<b>VOLATILITAS TINGGI</b>: {vol_20:.2f}% (20-hari). Pasar forex sedang sangat dinamis -- pergerakan besar mungkin terjadi."
         vol_class = "warning"
     elif vol_20 > 0.5:
         vol_desc = f"<b>VOLATILITAS MODERAT</b>: {vol_20:.2f}% (20-hari). Kondisi pasar normal untuk forex."
@@ -328,12 +328,12 @@ def generate_forex_insights(model_name, pair_name, metrics, indicators, future_p
         vol_class = "positive"
     
     if vol_20 > vol_60 * 1.3:
-        vol_desc += " Volatilitas jangka pendek <b>meningkat</b> — pantau berita ekonomi penting."
+        vol_desc += " Volatilitas jangka pendek <b>meningkat</b> -- pantau berita ekonomi penting."
     elif vol_20 < vol_60 * 0.7:
-        vol_desc += " Volatilitas jangka pendek <b>menurun</b> — pasar stabil."
+        vol_desc += " Volatilitas jangka pendek <b>menurun</b> -- pasar stabil."
     
     insights.append({
-        'title': '📉 Volatilitas Pasar',
+        'title': 'Volatilitas Pasar',
         'content': vol_desc,
         'variant': vol_class
     })
@@ -352,19 +352,19 @@ def generate_forex_insights(model_name, pair_name, metrics, indicators, future_p
         fut_desc = f"Proyeksi <b>{'penguatan' if future_change > 0 else 'pelemahan'} moderat</b> {future_change:+.2f}% (~{pip_movement:,.0f} pips). "
     else:
         fut_class = "default"
-        fut_desc = f"Proyeksi relatif <b>flat</b> ({future_change:+.2f}%, ~{pip_movement:,.0f} pips) — konsolidasi. "
+        fut_desc = f"Proyeksi relatif <b>flat</b> ({future_change:+.2f}%, ~{pip_movement:,.0f} pips) -- konsolidasi. "
     
-    fut_desc += f"Range: <b>{symbol}{future_preds.min():,.2f} — {symbol}{future_preds.max():,.2f}</b>."
+    fut_desc += f"Range: <b>{symbol}{future_preds.min():,.2f} -- {symbol}{future_preds.max():,.2f}</b>."
     
     insights.append({
-        'title': f'🔮 Proyeksi {len(future_preds)} Hari ke Depan',
+        'title': f'Proyeksi {len(future_preds)} Hari ke Depan',
         'content': fut_desc,
         'variant': fut_class
     })
     
     # Forex specific
     insights.append({
-        'title': '💱 Karakteristik Pasar Forex',
+        'title': 'Karakteristik Pasar Forex',
         'content': f"Forex beroperasi <b>24 jam/5 hari</b>. {pair_name} paling aktif selama sesi overlap London-New York (19:00-23:00 WIB). "
                    f"Spread estimasi: <b>{symbol}{indicators['current_spread_estimate']:,.2f}</b> per unit. "
                    f"Gunakan risk management ketat: max 1-2% risk per trade.",
@@ -423,8 +423,8 @@ def plot_forex_test_zoom(df, train_size, val_size, seq_len, y_test_actual, y_pre
                 ha='center')
     
     ax1.set_ylabel(f'Exchange Rate ({symbol})', fontweight='bold')
-    ax1.set_title(f'Zoom: Test Data Only — {model_name} | {pair_name}\n'
-                  f'MAPE: {mape_val:.2f}% | R²: {r2:.4f} | Avg Error: {symbol}{mae_line:,.2f}',
+    ax1.set_title(f'Zoom: Test Data Only -- {model_name} | {pair_name}\n'
+                  f'MAPE: {mape_val:.2f}% | R-squared: {r2:.4f} | Avg Error: {symbol}{mae_line:,.2f}',
                   fontweight='bold', fontsize=13)
     
     handles, labels = ax1.get_legend_handles_labels()
@@ -459,15 +459,15 @@ def plot_forex_test_zoom(df, train_size, val_size, seq_len, y_test_actual, y_pre
 
 # ==================== SIDEBAR ====================
 with st.sidebar:
-    st.header("⚙️ Forex Parameters")
+    st.header("Forex Parameters")
     
     # Forex pair selection
     pair_options = list(FOREX_PAIRS.keys())
     selected_pair = st.selectbox(
-        "💱 Pasangan Mata Uang",
+        "Currency Pair",
         pair_options,
-        index=0,  # Default to USD/IDR
-        help="Pilih pasangan mata uang untuk analisis"
+        index=0,
+        help="Select currency pair for analysis"
     )
     
     pair_info = FOREX_PAIRS[selected_pair]
@@ -478,34 +478,34 @@ with st.sidebar:
     pip_size = pair_info['pip_size']
     
     st.markdown(f"""
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); 
                 color: white; padding: 0.8rem; border-radius: 8px; text-align: center; margin: 0.5rem 0;">
-        <div style="font-size: 0.8rem; opacity: 0.9;">{base_currency}/{quote_currency}</div>
-        <div style="font-size: 1.3rem; font-weight: 700;">{currency_symbol} — {selected_pair}</div>
+        <div style="font-size: 0.8rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px;">{base_currency}/{quote_currency}</div>
+        <div style="font-size: 1.3rem; font-weight: 700;">{currency_symbol} -- {selected_pair}</div>
     </div>
     """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     with col1:
-        start_date = st.date_input("📅 Tanggal Mulai", value=datetime(2020, 1, 1))
+        start_date = st.date_input("Start Date", value=datetime(2020, 1, 1))
     with col2:
-        end_date = st.date_input("📅 Tanggal Akhir", value=datetime.now())
+        end_date = st.date_input("End Date", value=datetime.now())
     
     st.markdown("---")
-    st.subheader("🧠 Model & Training")
+    st.subheader("Model & Training")
     
     model_type = st.selectbox(
-        "Arsitektur LSTM",
+        "LSTM Architecture",
         ["Vanilla LSTM", "Bidirectional LSTM"],
         index=0,
-        help="Vanilla: Cepat & efisien. Bidirectional: Lebih akurat untuk pattern recognition"
+        help="Vanilla: Fast & efficient. Bidirectional: Better pattern recognition"
     )
     
     seq_len = st.selectbox(
-        "Sequence Length (hari)",
+        "Sequence Length (days)",
         [3, 5, 7, 10, 14, 20],
         index=3,
-        help="Jumlah hari historis untuk 1 prediksi. Forex: 10-14 hari optimal"
+        help="Historical days used for 1 prediction. Forex: 10-14 days optimal"
     )
     
     epochs = st.slider("Epochs", 10, 200, 100, 10)
@@ -519,14 +519,14 @@ with st.sidebar:
     )
     
     st.markdown("---")
-    st.subheader("📈 Prediksi")
-    future_days = st.slider("Jumlah Hari ke Depan", 5, 30, 14, 1)
+    st.subheader("Prediction")
+    future_days = st.slider("Forecast Days", 5, 30, 14, 1)
     
-    predict_btn = st.button("🚀 MULAI ANALISIS FOREX", type="primary", use_container_width=True)
+    predict_btn = st.button("START FOREX ANALYSIS", type="primary", use_container_width=True)
     
     st.markdown("---")
-    st.caption("💻 Powered by PyTorch + Yahoo Finance")
-    st.caption("⚡ Forex Edition v1.0")
+    st.caption("Powered by PyTorch + Yahoo Finance")
+    st.caption("Forex Edition v1.0")
 
 # Apply theme
 st.markdown(get_theme_css(), unsafe_allow_html=True)
@@ -534,16 +534,16 @@ st.markdown(get_theme_css(), unsafe_allow_html=True)
 # ==================== HEADER ====================
 col_title, col_logo = st.columns([4, 1])
 with col_title:
-    st.title("💱 RixterProphet Analytics")
-    st.caption("Forex Edition — LSTM-Based Predictive Analytics with Deep Insights")
+    st.title("RixterProphet Analytics")
+    st.caption("Forex Edition -- LSTM-Based Predictive Analytics with Deep Insights")
 
 # ==================== MAIN LOGIC ====================
 if predict_btn:
     try:
-        with st.spinner(f"📥 Mengunduh data {selected_pair} dari Yahoo Finance..."):
+        with st.spinner(f"Downloading {selected_pair} data from Yahoo Finance..."):
             df = download_forex_data(ticker, start_date, end_date)
             if df is None or len(df) < 100:
-                st.error(f"❌ Data tidak mencukupi. Minimal 100 baris data diperlukan untuk analisis yang valid.")
+                st.error(f"Data insufficient. Minimum 100 rows required for valid analysis.")
                 st.stop()
         
         # Display current rate
@@ -554,7 +554,7 @@ if predict_btn:
         st.markdown(get_forex_rate_card(selected_pair, current_rate, rate_change, currency_symbol), 
                    unsafe_allow_html=True)
         
-        st.success(f"✅ **{len(df):,} baris data** ({df['Date'].min().strftime('%d %b %Y')} — {df['Date'].max().strftime('%d %b %Y')})")
+        st.success(f"**{len(df):,} data rows** ({df['Date'].min().strftime('%d %b %Y')} -- {df['Date'].max().strftime('%d %b %Y')})")
         
         # Split data
         n = len(df)
@@ -565,14 +565,14 @@ if predict_btn:
         indicators = calculate_technical_indicators(df)
         
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.subheader("📊 Pembagian Data")
+        st.subheader("Data Split")
         col1, col2, col3, col4 = st.columns(4)
-        col1.metric("Training", f"{train_size:,} baris", f"{train_size/n*100:.0f}%")
-        col2.metric("Validation", f"{val_size:,} baris", f"{val_size/n*100:.0f}%")
-        col3.metric("Test", f"{test_size:,} baris", f"{test_size/n*100:.0f}%")
-        col4.metric("Prediksi", f"{future_days} hari", "ke depan")
+        col1.metric("Training", f"{train_size:,} rows", f"{train_size/n*100:.0f}%")
+        col2.metric("Validation", f"{val_size:,} rows", f"{val_size/n*100:.0f}%")
+        col3.metric("Test", f"{test_size:,} rows", f"{test_size/n*100:.0f}%")
+        col4.metric("Forecast", f"{future_days} days", "ahead")
         
-        with st.spinner("🔄 Memproses data & scaling..."):
+        with st.spinner("Processing data & scaling..."):
             features = ['Close', 'High', 'Low', 'Open']
             data_full = df[features].values
             scaler = MinMaxScaler()
@@ -591,7 +591,7 @@ if predict_btn:
             train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
             val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
         
-        with st.spinner("🏗️ Membangun arsitektur model..."):
+        with st.spinner("Building model architecture..."):
             if model_type == "Vanilla LSTM":
                 model = VanillaLSTM(4, hidden_units, 1, 0.1)
             else:
@@ -600,19 +600,19 @@ if predict_btn:
             total_params = sum(p.numel() for p in model.parameters())
             trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
         
-        st.info(f"🧠 **{model_type}** | Total Parameters: **{total_params:,}** | Trainable: **{trainable_params:,}**")
+        st.info(f"**{model_type}** | Total Parameters: **{total_params:,}** | Trainable: **{trainable_params:,}**")
         
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.subheader("🔄 Proses Training")
+        st.subheader("Training Process")
         
         model, train_losses, val_losses, actual_epochs = train_model(model, train_loader, val_loader, epochs, lr)
-        st.success(f"✅ Training selesai — **{actual_epochs} epochs** dijalankan")
+        st.success(f"Training complete -- **{actual_epochs} epochs** executed")
         
         # Loss plot
         fig_loss, ax_loss = plt.subplots(figsize=(10, 3))
         apply_plot_style(fig_loss, ax_loss)
-        ax_loss.plot(range(1, len(train_losses)+1), train_losses, '#667eea', label='Train Loss', linewidth=1.5)
-        ax_loss.plot(range(1, len(val_losses)+1), val_losses, '#e74c3c', label='Val Loss', linewidth=1.5)
+        ax_loss.plot(range(1, len(train_losses)+1), train_losses, '#1a1a2e', label='Train Loss', linewidth=1.5)
+        ax_loss.plot(range(1, len(val_losses)+1), val_losses, '#8a2e2e', label='Val Loss', linewidth=1.5)
         ax_loss.set_xlabel('Epoch')
         ax_loss.set_ylabel('Loss (MSE)')
         ax_loss.set_title('Training & Validation Loss Curve', fontweight='bold')
@@ -620,7 +620,7 @@ if predict_btn:
         ax_loss.grid(alpha=0.3)
         st.pyplot(fig_loss)
         
-        with st.spinner("🎯 Menghasilkan prediksi..."):
+        with st.spinner("Generating predictions..."):
             model.eval()
             X_test_t = torch.FloatTensor(X_test)
             X_train_t = torch.FloatTensor(X_train)
@@ -646,7 +646,7 @@ if predict_btn:
             r2 = 1 - (ss_res / ss_tot) if ss_tot != 0 else 0
         
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.subheader("📊 Metrik Performa Model")
+        st.subheader("Model Performance Metrics")
         
         c1, c2, c3, c4 = st.columns(4)
         c1.metric("MAE", f"{currency_symbol} {mae:,.2f}")
@@ -656,7 +656,7 @@ if predict_btn:
         c4.metric("R-squared", f"{r2:.4f}", delta="Strong" if r2 > 0.7 else "Moderate")
         
         # Future prediction
-        with st.spinner(f"🔮 Memprediksi {future_days} hari ke depan..."):
+        with st.spinner(f"Forecasting {future_days} days ahead..."):
             last_sequence = scaled_full[-seq_len:]
             current_seq = torch.FloatTensor(last_sequence).unsqueeze(0)
             
@@ -705,7 +705,7 @@ if predict_btn:
         
         # ========== FULL OVERVIEW PLOT ==========
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.subheader(f"📈 Grafik Prediksi — {model_type} | {selected_pair}")
+        st.subheader(f"Prediction Chart -- {model_type} | {selected_pair}")
         
         all_dates = np.concatenate([
             df['Date'].iloc[seq_len:train_size].values,
@@ -729,15 +729,15 @@ if predict_btn:
         ax1.fill_between(future_dates_list,
                          future_actual - future_std,
                          future_actual + future_std,
-                         alpha=0.15, color='green', label='Projection Band (±1σ)')
+                         alpha=0.15, color='green', label='Projection Band (+/-1 std)')
         
         test_start_date = df['Date'].iloc[train_size + val_size]
         ax1.axvspan(test_start_date, last_date, alpha=0.08, color='#ff7f0e', label='Test Period')
         ax1.axvline(x=last_date, color='#666', linestyle='--', alpha=0.5, linewidth=1)
         ax1.text(last_date, ax1.get_ylim()[1]*0.95, 'Past | Future', ha='center', fontsize=9, color='#666')
         
-        ax1.set_title(f'{model_type} — {selected_pair} Exchange Rate Prediction\n'
-                     f'R²: {r2:.4f} | MAPE: {mape_val:.2f}%', fontweight='bold', fontsize=14)
+        ax1.set_title(f'{model_type} -- {selected_pair} Exchange Rate Prediction\n'
+                     f'R-squared: {r2:.4f} | MAPE: {mape_val:.2f}%', fontweight='bold', fontsize=14)
         
         handles, labels = ax1.get_legend_handles_labels()
         by_label = dict(zip(labels, handles))
@@ -752,9 +752,9 @@ if predict_btn:
         
         # ========== TEST ZOOM ==========
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.subheader(f"🔍 Zoom: Data Testing — Actual vs Predicted")
+        st.subheader(f"Test Data Zoom -- Actual vs Predicted")
         
-        st.caption(f"Periode Test: {df['Date'].iloc[train_size+val_size].strftime('%d %b %Y')} — "
+        st.caption(f"Test Period: {df['Date'].iloc[train_size+val_size].strftime('%d %b %Y')} -- "
                   f"{df['Date'].iloc[-1].strftime('%d %b %Y')} ({len(y_test_actual):,} data points)")
         
         fig_zoom = plot_forex_test_zoom(
@@ -768,33 +768,33 @@ if predict_btn:
         
         # ========== PREDICTION TABLE ==========
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.subheader(f"📋 Tabel Proyeksi {future_days} Hari — {selected_pair}")
+        st.subheader(f"Forecast Table -- Next {future_days} Days | {selected_pair}")
         
         pred_data = []
         for i, (date, price) in enumerate(zip(future_dates_list, future_actual)):
-            day_names = {0: 'Senin', 1: 'Selasa', 2: 'Rabu', 3: 'Kamis', 4: 'Jumat'}
+            day_names = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday'}
             day_id = day_names.get(date.weekday(), '')
             
             if i == 0:
                 ch_pct = 0
-                ch_str = "—"
+                ch_str = "--"
                 pip_change = 0
             else:
                 ch_pct = ((price - future_actual[0]) / future_actual[0]) * 100
                 ch_str = f"{ch_pct:+.4f}%"
                 pip_change = (price - future_actual[0]) / pip_size
             
-            pip_str = f"{pip_change:+.0f} pips" if i > 0 else "—"
+            pip_str = f"{pip_change:+.0f} pips" if i > 0 else "--"
             
-            ch_html = f'<span style="color:#27ae60;font-weight:600;">{ch_str}</span>' if ch_pct > 0 else \
-                     f'<span style="color:#e74c3c;font-weight:600;">{ch_str}</span>' if ch_pct < 0 else ch_str
+            ch_html = f'<span style="color:#2d4a2d;font-weight:600;">{ch_str}</span>' if ch_pct > 0 else \
+                     f'<span style="color:#8a2e2e;font-weight:600;">{ch_str}</span>' if ch_pct < 0 else ch_str
             
             pred_data.append({
-                'Hari ke': i+1,
-                'Tanggal': date.strftime('%d %b %Y'),
-                'Hari': day_id,
-                'Prediksi Rate': f"{currency_symbol}{price:,.2f}",
-                'Perubahan %': ch_html,
+                'Day': i+1,
+                'Date': date.strftime('%d %b %Y'),
+                'Weekday': day_id,
+                'Forecast Rate': f"{currency_symbol}{price:,.2f}",
+                'Change %': ch_html,
                 'Pips': pip_str
             })
         
@@ -806,7 +806,7 @@ if predict_btn:
         
         # ========== INSIGHTS ==========
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.header("💡 Insight & Analisis Mendalam")
+        st.header("Deep Insights & Analysis")
         
         metrics = {
             'mae': mae,
@@ -822,7 +822,7 @@ if predict_btn:
         
         future_change = ((future_actual[-1] - future_actual[0]) / future_actual[0]) * 100
         
-        st.subheader("📊 Ringkasan Eksekutif")
+        st.subheader("Executive Summary")
         
         emph_col1, emph_col2, emph_col3 = st.columns(3)
         
@@ -830,7 +830,7 @@ if predict_btn:
             st.markdown(
                 get_highlight_box(
                     f"{future_change:+.2f}%",
-                    f"Proyeksi {future_days} Hari",
+                    f"{future_days}-Day Forecast",
                     "up" if future_change > 0.5 else ("down" if future_change < -0.5 else "neutral")
                 ),
                 unsafe_allow_html=True
@@ -840,7 +840,7 @@ if predict_btn:
             st.markdown(
                 get_highlight_box(
                     f"{mape_val:.2f}%",
-                    "Tingkat Error (MAPE)",
+                    "Error Rate (MAPE)",
                     "up" if mape_val < 1 else ("down" if mape_val > 5 else "neutral")
                 ),
                 unsafe_allow_html=True
@@ -850,7 +850,7 @@ if predict_btn:
             st.markdown(
                 get_highlight_box(
                     f"{indicators['volatility_20d']:.3f}%",
-                    "Volatilitas (20 Hari)",
+                    "Volatility (20-Day)",
                     "up" if indicators['volatility_20d'] < 0.5 else ("down" if indicators['volatility_20d'] > 1 else "neutral")
                 ),
                 unsafe_allow_html=True
@@ -858,7 +858,7 @@ if predict_btn:
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.subheader("📝 Analisis Detail")
+        st.subheader("Detailed Analysis")
         
         for i in range(0, len(insights), 2):
             col1, col2 = st.columns(2)
@@ -874,18 +874,18 @@ if predict_btn:
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
         st.markdown(f"""
         <div class="note-box">
-            <b>⚠️ Disclaimer Forex:</b> Prediksi ini dihasilkan oleh model machine learning dan <b>hanya bersifat informatif</b>. 
-            Pasar forex sangat volatile dan dipengaruhi oleh banyak faktor fundamental seperti suku bunga, data ekonomi, 
-            dan peristiwa geopolitik yang tidak dapat diprediksi oleh model teknikal.<br><br>
-            <b>Hasil prediksi BUKAN merupakan rekomendasi trading.</b> Selalu gunakan risk management yang ketat 
-            (max 1-2% risk per trade), pantau kalender ekonomi, dan konsultasikan dengan profesional keuangan 
-            sebelum membuat keputusan trading. Trading forex mengandung risiko tinggi dan tidak cocok untuk semua investor.
+            <b>Disclaimer:</b> This prediction is generated by a machine learning model and is <b>for informational purposes only</b>. 
+            The forex market is highly volatile and influenced by numerous fundamental factors such as interest rates, economic data, 
+            and geopolitical events that cannot be predicted by technical models alone.<br><br>
+            <b>This is NOT trading advice.</b> Always practice strict risk management 
+            (max 1-2% risk per trade), monitor the economic calendar, and consult with a qualified financial professional 
+            before making any trading decisions. Forex trading involves substantial risk and is not suitable for all investors.
         </div>
         """, unsafe_allow_html=True)
         
     except Exception as e:
-        st.error(f"❌ Terjadi kesalahan: {str(e)}")
-        with st.expander("Detail Error (untuk debugging)"):
+        st.error(f"An error occurred: {str(e)}")
+        with st.expander("Error Details (for debugging)"):
             import traceback
             st.code(traceback.format_exc())
 
@@ -897,93 +897,93 @@ else:
     
     with col1:
         st.markdown("""
-        ### 💱 Selamat Datang di RixterProphet Forex Analytics
+        ### Welcome to RixterProphet Forex Analytics
         
-        Platform prediksi nilai tukar mata uang berbasis **Deep Learning (LSTM)** dengan 
-        analisis mendalam dan penekanan pada insight yang actionable untuk trading forex.
+        A **Deep Learning (LSTM)** based currency exchange rate prediction platform 
+        delivering in-depth analysis with actionable insights for forex trading.
         
-        #### 🎯 Fitur Utama:
-        - **8 Pasangan Forex Utama**: USD/IDR, EUR/USD, GBP/USD, dll.
-        - **2 Arsitektur LSTM**: Vanilla & Bidirectional
-        - **Technical Indicators**: Support/Resistance, MA, Volatilitas
+        #### Key Features:
+        - **8 Major Forex Pairs**: USD/IDR, EUR/USD, GBP/USD, and more
+        - **2 LSTM Architectures**: Vanilla & Bidirectional
+        - **Technical Indicators**: Support/Resistance, MA, Volatility
         - **Forex-Specific Metrics**: Pip movement, spread estimation
-        - **Deep Insights**: 5 kategori analisis otomatis
-        - **Clear Emphasis**: Highlight pada metrik kunci & proyeksi
-        - **Professional Visualization**: Grafik interaktif dengan projection band
+        - **Deep Insights**: 5 automated analysis categories
+        - **Clear Emphasis**: Key metrics & projection highlights
+        - **Professional Visualization**: Interactive charts with projection bands
         """)
     
     with col2:
         st.markdown("""
-        #### 📋 Cara Menggunakan:
+        #### How to Use:
         
-        1. **Pilih Pasangan Forex** (default: USD/IDR)
-        2. **Tentukan Rentang Tanggal** data historis
-        3. **Pilih Arsitektur Model** (Vanilla/Bidirectional)
-        4. **Konfigurasi Hyperparameters** (atau gunakan default)
-        5. **Tentukan Jumlah Hari** untuk prediksi
-        6. **Klik "Mulai Analisis Forex"**
+        1. **Select a Forex Pair** (default: USD/IDR)
+        2. **Set the Date Range** for historical data
+        3. **Choose Model Architecture** (Vanilla/Bidirectional)
+        4. **Configure Hyperparameters** (or use defaults)
+        5. **Set the Number of Days** to forecast
+        6. **Click "Start Forex Analysis"**
         
         ---
         
-        #### 💱 Pasangan Tersedia:
-        | Pair | Deskripsi |
-        |------|-----------|
-        | `USD/IDR` | US Dollar - Rupiah 🇮🇩 |
-        | `EUR/USD` | Euro - US Dollar 🇪🇺 |
-        | `GBP/USD` | Pound Sterling - USD 🇬🇧 |
-        | `USD/JPY` | US Dollar - Yen 🇯🇵 |
-        | `AUD/USD` | Aussie Dollar - USD 🇦🇺 |
-        | `USD/SGD` | US Dollar - Sing Dollar 🇸🇬 |
-        | `EUR/JPY` | Euro - Yen 🇪🇺🇯🇵 |
-        | `GBP/JPY` | Pound - Yen 🇬🇧🇯🇵 |
+        #### Available Pairs:
+        | Pair | Description |
+        |------|-------------|
+        | `USD/IDR` | US Dollar - Indonesian Rupiah |
+        | `EUR/USD` | Euro - US Dollar |
+        | `GBP/USD` | Pound Sterling - USD |
+        | `USD/JPY` | US Dollar - Japanese Yen |
+        | `AUD/USD` | Australian Dollar - USD |
+        | `USD/SGD` | US Dollar - Singapore Dollar |
+        | `EUR/JPY` | Euro - Japanese Yen |
+        | `GBP/JPY` | Pound Sterling - Yen |
         """)
     
     st.info("""
-    🚀 **Siap memulai?** Pilih pasangan forex di sidebar kiri, konfigurasi parameter, lalu klik **MULAI ANALISIS FOREX**.
+    **Ready to begin?** Select a forex pair in the left sidebar, configure your parameters, then click **START FOREX ANALYSIS**.
     
-    Model akan mengunduh data historis, melatih LSTM, dan menghasilkan prediksi nilai tukar beserta insight mendalam untuk membantu analisis Anda.
+    The model will download historical data, train the LSTM, and generate exchange rate predictions with deep insights to support your analysis.
     
-    ⚡ **Tips**: Untuk hasil optimal, gunakan data minimal 1-2 tahun dan sequence length 10-14 hari untuk forex.
+    **Tip**: For optimal results, use at least 1-2 years of data and a sequence length of 10-14 days for forex.
     """)
     
     # Quick start cards
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-    st.subheader("🎯 Quick Start Examples")
+    st.subheader("Quick Start Examples")
     
     qcol1, qcol2, qcol3 = st.columns(3)
     
     with qcol1:
         st.markdown("""
         <div class="metric-card">
-            <h4>🇮🇩 USD/IDR Analysis</h4>
-            <p>• Pair: <b>USD/IDR</b><br>
-            • Model: Bidirectional LSTM<br>
-            • Period: 2020-2024<br>
-            • Seq Length: 14<br>
-            • Prediction: 14 days</p>
+            <h4>USD/IDR Analysis</h4>
+            <p>Pair: <b>USD/IDR</b><br>
+            Model: Bidirectional LSTM<br>
+            Period: 2020-2024<br>
+            Seq Length: 14<br>
+            Forecast: 14 days</p>
         </div>
         """, unsafe_allow_html=True)
     
     with qcol2:
         st.markdown("""
         <div class="metric-card">
-            <h4>🇪🇺 EUR/USD Analysis</h4>
-            <p>• Pair: <b>EUR/USD</b><br>
-            • Model: Vanilla LSTM<br>
-            • Period: 2021-2024<br>
-            • Seq Length: 10<br>
-            • Prediction: 7 days</p>
+            <h4>EUR/USD Analysis</h4>
+            <p>Pair: <b>EUR/USD</b><br>
+            Model: Vanilla LSTM<br>
+            Period: 2021-2024<br>
+            Seq Length: 10<br>
+            Forecast: 7 days</p>
         </div>
         """, unsafe_allow_html=True)
     
     with qcol3:
         st.markdown("""
         <div class="metric-card">
-            <h4>🇯🇵 USD/JPY Analysis</h4>
-            <p>• Pair: <b>USD/JPY</b><br>
-            • Model: Bidirectional LSTM<br>
-            • Period: 2020-2024<br>
-            • Seq Length: 20<br>
-            • Prediction: 21 days</p>
+            <h4>USD/JPY Analysis</h4>
+            <p>Pair: <b>USD/JPY</b><br>
+            Model: Bidirectional LSTM<br>
+            Period: 2020-2024<br>
+            Seq Length: 20<br>
+            Forecast: 21 days</p>
         </div>
         """, unsafe_allow_html=True)
