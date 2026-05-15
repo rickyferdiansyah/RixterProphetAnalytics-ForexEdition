@@ -534,7 +534,7 @@ st.markdown(get_theme_css(), unsafe_allow_html=True)
 # ==================== HEADER ====================
 col_title, col_logo = st.columns([4, 1])
 with col_title:
-    st.title("RixterProphet Analytics")
+    st.title("RixterProphet Analytics - Forex Edition")
     st.caption("Forex Edition -- LSTM-Based Predictive Analytics with Deep Insights")
 
 # ==================== MAIN LOGIC ====================
