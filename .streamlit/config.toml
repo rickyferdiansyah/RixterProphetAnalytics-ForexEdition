@@ -1,14 +1,35 @@
-[theme]
-primaryColor = "#4da6ff"
-backgroundColor = "#0e1117"
-secondaryBackgroundColor = "#1a1c23"
-textColor = "#e0e0e0"
-font = "sans serif"
+# .streamlit/config.toml
+# RixterProphet Analytics - Forex Edition
+# Dark Luxury Theme Configuration
 
-[server]
-maxUploadSize = 10
-enableCORS = false
-enableXsrfProtection = true
+[theme]
+# Primary color - Gold accent for luxury
+primaryColor = "#c9a84c"
+
+# Background color - Very dark navy
+backgroundColor = "#0d1117"
+
+# Secondary background - Slightly lighter dark
+secondaryBackgroundColor = "#161b22"
+
+# Text color - Light gray for readability
+textColor = "#e6edf3"
+
+# Font - Clean sans-serif
+font = "sans-serif"
 
 [browser]
 gatherUsageStats = false
+
+[server]
+maxUploadSize = 10
+maxMessageSize = 200
+enableCORS = true
+enableXsrfProtection = true
+
+[logger]
+level = "info"
+messageFormat = "%(asctime)s %(levelname)s %(message)s"
+
+[runner]
+fastReruns = true
