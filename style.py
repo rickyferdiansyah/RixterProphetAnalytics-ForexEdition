@@ -23,9 +23,10 @@ def get_theme_css():
     
     /* ============ HEADERS ============ */
     h1 {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
         font-weight: 800 !important;
         font-size: 2.5rem !important;
         margin-bottom: 0.5rem !important;
@@ -33,17 +34,27 @@ def get_theme_css():
     }
     
     h2 {
-        color: #1a1a2e;
+        color: #2c3e50;
         font-weight: 700 !important;
-        border-bottom: 2px solid #1a1a2e;
+        border-bottom: 2px solid #3498db;
         padding-bottom: 0.5rem;
         letter-spacing: -0.3px;
     }
     
     h3 {
-        color: #2c3e50;
+        color: #34495e;
         font-weight: 600 !important;
         letter-spacing: -0.2px;
+    }
+    
+    h4 {
+        color: #2c3e50;
+        font-weight: 600 !important;
+    }
+    
+    /* ============ SIDEBAR HEADER ============ */
+    .sidebar .stHeader {
+        color: #2c3e50 !important;
     }
     
     /* ============ CARDS & CONTAINERS ============ */
@@ -53,8 +64,8 @@ def get_theme_css():
     }
     
     .note-box {
-        background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-        border-left: 4px solid #555;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-left: 4px solid #3498db;
         padding: 1rem 1.5rem;
         border-radius: 8px;
         margin: 1.5rem 0;
@@ -76,7 +87,7 @@ def get_theme_css():
     }
     
     .prediction-table th {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
         color: white;
         padding: 12px 15px;
         text-align: left;
@@ -101,7 +112,7 @@ def get_theme_css():
     
     /* ============ METRIC CARDS ============ */
     .metric-card {
-        background: #051d2770;
+        background: white;
         border-radius: 10px;
         padding: 1.5rem;
         box-shadow: 0 4px 20px rgba(0,0,0,0.06);
@@ -116,7 +127,7 @@ def get_theme_css():
     
     /* ============ BUTTONS ============ */
     .stButton > button {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
         color: white !important;
         font-weight: 600 !important;
         font-size: 15px !important;
@@ -129,7 +140,7 @@ def get_theme_css():
     
     .stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3) !important;
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3) !important;
     }
     
     /* ============ SIDEBAR ============ */
@@ -148,7 +159,7 @@ def get_theme_css():
     
     /* ============ SPINNER ============ */
     .stSpinner > div {
-        border-top-color: #1a1a2e !important;
+        border-top-color: #3498db !important;
     }
     
     /* ============ DATA METRICS ============ */
@@ -173,7 +184,7 @@ def get_theme_css():
     }
     
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
         border-radius: 10px;
     }
     
@@ -188,7 +199,7 @@ def get_theme_css():
     .rate-display {
         font-size: 2rem;
         font-weight: 800;
-        color: #1a1a2e;
+        color: #2c3e50;
         text-align: center;
         padding: 1.5rem;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -231,12 +242,12 @@ def apply_plot_style(fig, axes=None):
 
 
 def get_insight_card(title, content, variant="default"):
-    """Generate insight card HTML with color coding - no emojis"""
+    """Generate insight card HTML with color coding"""
     variants = {
-        "positive": {"bg": "#f0f4f0", "border": "#2d4a2d", "text": "#1a2e1a", "accent": "#2d4a2d"},
-        "warning": {"bg": "#faf8f0", "border": "#8a7a2e", "text": "#4a3e1a", "accent": "#8a7a2e"},
-        "danger": {"bg": "#faf0f0", "border": "#8a2e2e", "text": "#4a1a1a", "accent": "#8a2e2e"},
-        "default": {"bg": "#f5f5f5", "border": "#555", "text": "#2a2a2a", "accent": "#555"},
+        "positive": {"bg": "#f0f4f0", "border": "#27ae60", "text": "#1a2e1a", "accent": "#27ae60"},
+        "warning": {"bg": "#fef9e7", "border": "#f39c12", "text": "#4a3e1a", "accent": "#f39c12"},
+        "danger": {"bg": "#fdf2f2", "border": "#e74c3c", "text": "#4a1a1a", "accent": "#e74c3c"},
+        "default": {"bg": "#f5f7fa", "border": "#3498db", "text": "#2a2a2a", "accent": "#3498db"},
     }
     
     v = variants.get(variant, variants["default"])
@@ -262,11 +273,11 @@ def get_insight_card(title, content, variant="default"):
 
 
 def get_highlight_box(value, label, trend="neutral"):
-    """Generate highlight box for key metrics - no emojis"""
+    """Generate highlight box for key metrics"""
     colors = {
-        "up": {"bg": "#f0f4f0", "border": "#2d4a2d", "text": "#1a2e1a", "indicator": "▲"},
-        "down": {"bg": "#faf0f0", "border": "#8a2e2e", "text": "#4a1a1a", "indicator": "▼"},
-        "neutral": {"bg": "#faf8f0", "border": "#8a7a2e", "text": "#4a3e1a", "indicator": "■"},
+        "up": {"bg": "#f0f4f0", "border": "#27ae60", "text": "#1a2e1a", "indicator": "▲"},
+        "down": {"bg": "#fdf2f2", "border": "#e74c3c", "text": "#4a1a1a", "indicator": "▼"},
+        "neutral": {"bg": "#f5f7fa", "border": "#3498db", "text": "#2c3e50", "indicator": "■"},
     }
     
     c = colors.get(trend, colors["neutral"])
@@ -292,20 +303,21 @@ def get_highlight_box(value, label, trend="neutral"):
 
 
 def get_forex_rate_card(pair, rate, change, symbol):
-    """Special card for displaying forex rates - no emojis"""
-    change_color = "#2d4a2d" if change >= 0 else "#8a2e2e"
+    """Special card for displaying forex rates"""
+    change_color = "#27ae60" if change >= 0 else "#e74c3c"
     change_sign = "+" if change >= 0 else ""
+    trend_indicator = "▲" if change >= 0 else "▼"
     
     return f"""
     <div class="rate-display">
         <div style="font-size: 0.85rem; color: #888; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">
             {pair}
         </div>
-        <div style="font-size: 2.8rem; font-weight: 800; color: #1a1a2e; letter-spacing: -1px;">
+        <div style="font-size: 2.8rem; font-weight: 800; color: #2c3e50; letter-spacing: -1px;">
             {symbol} {rate:,.2f}
         </div>
         <div style="font-size: 1rem; color: {change_color}; margin-top: 0.4rem; font-weight: 600;">
-            {change_sign}{change:.2f}
+            {trend_indicator} {change_sign}{change:.2f}
         </div>
     </div>
     """
