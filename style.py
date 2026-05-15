@@ -23,24 +23,27 @@ def get_theme_css():
     
     /* ============ HEADERS ============ */
     h1 {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 800 !important;
         font-size: 2.5rem !important;
         margin-bottom: 0.5rem !important;
+        letter-spacing: -0.5px;
     }
     
     h2 {
-        color: #2c3e50;
+        color: #1a1a2e;
         font-weight: 700 !important;
-        border-bottom: 2px solid #667eea;
+        border-bottom: 2px solid #1a1a2e;
         padding-bottom: 0.5rem;
+        letter-spacing: -0.3px;
     }
     
     h3 {
-        color: #34495e;
+        color: #2c3e50;
         font-weight: 600 !important;
+        letter-spacing: -0.2px;
     }
     
     /* ============ CARDS & CONTAINERS ============ */
@@ -50,8 +53,8 @@ def get_theme_css():
     }
     
     .note-box {
-        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-        border-left: 4px solid #e67e22;
+        background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        border-left: 4px solid #555;
         padding: 1rem 1.5rem;
         border-radius: 8px;
         margin: 1.5rem 0;
@@ -63,7 +66,7 @@ def get_theme_css():
         overflow-x: auto;
         margin: 1rem 0;
         border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 15px rgba(0,0,0,0.08);
     }
     
     .prediction-table table {
@@ -73,11 +76,13 @@ def get_theme_css():
     }
     
     .prediction-table th {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         color: white;
         padding: 12px 15px;
         text-align: left;
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     
     .prediction-table td {
@@ -86,12 +91,12 @@ def get_theme_css():
     }
     
     .prediction-table tr:hover {
-        background-color: #f8f9ff;
+        background-color: #f8f9fa;
     }
     
     .prediction-table tr:last-child {
         font-weight: 600;
-        background-color: #f8f9ff;
+        background-color: #fafafa;
     }
     
     /* ============ METRIC CARDS ============ */
@@ -99,40 +104,41 @@ def get_theme_css():
         background: white;
         border-radius: 10px;
         padding: 1.5rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border: 1px solid #e0e0e0;
-        transition: transform 0.2s;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        border: 1px solid #eee;
+        transition: all 0.3s ease;
     }
     
     .metric-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.10);
     }
     
     /* ============ BUTTONS ============ */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
         color: white !important;
         font-weight: 600 !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
         padding: 0.75rem 2rem !important;
         border-radius: 8px !important;
         border: none !important;
         transition: all 0.3s ease !important;
+        letter-spacing: 0.3px;
     }
     
     .stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+        box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3) !important;
     }
     
     /* ============ SIDEBAR ============ */
     .css-1d391kg, .css-1lcbmhc {
-        background-color: #f8f9fa;
+        background-color: #fafafa;
     }
     
     .sidebar .sidebar-content {
-        background-color: #f8f9fa;
+        background-color: #fafafa;
     }
     
     /* ============ INFO/SUCCESS BOXES ============ */
@@ -142,7 +148,7 @@ def get_theme_css():
     
     /* ============ SPINNER ============ */
     .stSpinner > div {
-        border-top-color: #667eea !important;
+        border-top-color: #1a1a2e !important;
     }
     
     /* ============ DATA METRICS ============ */
@@ -157,31 +163,23 @@ def get_theme_css():
     
     /* ============ CUSTOM SCROLLBAR ============ */
     ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
     }
     
     ::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: #f5f5f5;
         border-radius: 10px;
     }
     
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         border-radius: 10px;
-    }
-    
-    /* ============ TOOLTIP ============ */
-    .tooltip {
-        position: relative;
-        display: inline-block;
-        cursor: help;
-        border-bottom: 1px dotted #667eea;
     }
     
     /* ============ FOREX SPECIFIC STYLES ============ */
     .pip-indicator {
-        background: #f0f0f0;
+        background: #f5f5f5;
         padding: 8px 12px;
         border-radius: 6px;
         font-family: 'Courier New', monospace;
@@ -190,12 +188,13 @@ def get_theme_css():
     .rate-display {
         font-size: 2rem;
         font-weight: 800;
-        color: #2c3e50;
+        color: #1a1a2e;
         text-align: center;
-        padding: 1rem;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        border-radius: 10px;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 12px;
         margin: 1rem 0;
+        border: 1px solid #dee2e6;
     }
     </style>
     """
@@ -232,12 +231,12 @@ def apply_plot_style(fig, axes=None):
 
 
 def get_insight_card(title, content, variant="default"):
-    """Generate insight card HTML with color coding"""
+    """Generate insight card HTML with color coding - no emojis"""
     variants = {
-        "positive": {"bg": "#d4edda", "border": "#28a745", "icon": "✅", "text": "#155724"},
-        "warning": {"bg": "#fff3cd", "border": "#ffc107", "icon": "⚠️", "text": "#856404"},
-        "danger": {"bg": "#f8d7da", "border": "#dc3545", "icon": "🔴", "text": "#721c24"},
-        "default": {"bg": "#e2e3e5", "border": "#6c757d", "icon": "ℹ️", "text": "#383d41"},
+        "positive": {"bg": "#f0f4f0", "border": "#2d4a2d", "text": "#1a2e1a", "accent": "#2d4a2d"},
+        "warning": {"bg": "#faf8f0", "border": "#8a7a2e", "text": "#4a3e1a", "accent": "#8a7a2e"},
+        "danger": {"bg": "#faf0f0", "border": "#8a2e2e", "text": "#4a1a1a", "accent": "#8a2e2e"},
+        "default": {"bg": "#f5f5f5", "border": "#555", "text": "#2a2a2a", "accent": "#555"},
     }
     
     v = variants.get(variant, variants["default"])
@@ -246,15 +245,16 @@ def get_insight_card(title, content, variant="default"):
     <div style="
         background-color: {v['bg']};
         border-left: 4px solid {v['border']};
-        padding: 1rem 1.2rem;
+        padding: 1.2rem 1.5rem;
         border-radius: 6px;
         margin-bottom: 1rem;
         color: {v['text']};
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     ">
-        <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
-            {v['icon']} {title}
+        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; color: {v['accent']}; letter-spacing: 0.3px; text-transform: uppercase;">
+            {title}
         </div>
-        <div style="font-size: 0.95rem; line-height: 1.6;">
+        <div style="font-size: 0.92rem; line-height: 1.7;">
             {content}
         </div>
     </div>
@@ -262,11 +262,11 @@ def get_insight_card(title, content, variant="default"):
 
 
 def get_highlight_box(value, label, trend="neutral"):
-    """Generate highlight box for key metrics"""
+    """Generate highlight box for key metrics - no emojis"""
     colors = {
-        "up": {"bg": "#d4edda", "border": "#28a745", "text": "#155724", "emoji": "📈"},
-        "down": {"bg": "#f8d7da", "border": "#dc3545", "text": "#721c24", "emoji": "📉"},
-        "neutral": {"bg": "#fff3cd", "border": "#ffc107", "text": "#856404", "emoji": "➡️"},
+        "up": {"bg": "#f0f4f0", "border": "#2d4a2d", "text": "#1a2e1a", "indicator": "▲"},
+        "down": {"bg": "#faf0f0", "border": "#8a2e2e", "text": "#4a1a1a", "indicator": "▼"},
+        "neutral": {"bg": "#faf8f0", "border": "#8a7a2e", "text": "#4a3e1a", "indicator": "■"},
     }
     
     c = colors.get(trend, colors["neutral"])
@@ -274,36 +274,37 @@ def get_highlight_box(value, label, trend="neutral"):
     return f"""
     <div style="
         background-color: {c['bg']};
-        border: 2px solid {c['border']};
-        padding: 1rem;
+        border: 1.5px solid {c['border']};
+        padding: 1.2rem;
         border-radius: 8px;
         text-align: center;
         color: {c['text']};
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     ">
-        <div style="font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem;">
+        <div style="font-size: 0.8rem; font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
             {label}
         </div>
-        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.3rem;">
-            {c['emoji']} {value}
+        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.2rem; letter-spacing: -0.5px;">
+            {c['indicator']} {value}
         </div>
     </div>
     """
 
 
 def get_forex_rate_card(pair, rate, change, symbol):
-    """Special card for displaying forex rates"""
-    change_color = "#27ae60" if change >= 0 else "#e74c3c"
+    """Special card for displaying forex rates - no emojis"""
+    change_color = "#2d4a2d" if change >= 0 else "#8a2e2e"
     change_sign = "+" if change >= 0 else ""
     
     return f"""
     <div class="rate-display">
-        <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">
+        <div style="font-size: 0.85rem; color: #888; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">
             {pair}
         </div>
-        <div style="font-size: 2.5rem; font-weight: 800; color: #2c3e50;">
+        <div style="font-size: 2.8rem; font-weight: 800; color: #1a1a2e; letter-spacing: -1px;">
             {symbol} {rate:,.2f}
         </div>
-        <div style="font-size: 1.1rem; color: {change_color}; margin-top: 0.3rem;">
+        <div style="font-size: 1rem; color: {change_color}; margin-top: 0.4rem; font-weight: 600;">
             {change_sign}{change:.2f}
         </div>
     </div>
