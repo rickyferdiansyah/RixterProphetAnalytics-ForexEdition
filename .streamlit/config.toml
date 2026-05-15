@@ -1,19 +1,19 @@
 # .streamlit/config.toml
 # RixterProphet Analytics - Forex Edition
-# Professional Blue-Charcoal Theme Configuration
+# Dark Luxury Theme Configuration
 
 [theme]
-# Primary color - Elegant blue for professional look
-primaryColor = "#3498db"
+# Primary color - Gold accent for luxury feel
+primaryColor = "#c9a84c"
 
-# Background color - Clean white
-backgroundColor = "#ffffff"
+# Background color - Deep charcoal black
+backgroundColor = "#0d1117"
 
-# Secondary background - Light gray
-secondaryBackgroundColor = "#f8f9fa"
+# Secondary background - Slightly lighter dark
+secondaryBackgroundColor = "#161b22"
 
-# Text color - Dark charcoal
-textColor = "#2c3e50"
+# Text color - Soft white for readability
+textColor = "#e6edf3"
 
 # Font - Clean sans-serif
 font = "sans-serif"
