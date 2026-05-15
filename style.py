@@ -147,7 +147,7 @@ def get_theme_css():
     
     /* ============ BUTTONS ============ */
     .stButton > button {
-        background: linear-gradient(135deg, #c9a84c 0%, #b8963e 100%) !important;
+        background: linear-gradient(135deg, rgb(105 77 0) 0%, #000c31 100%) !important
         color: #0d1117 !important;
         font-weight: 700 !important;
         font-size: 15px !important;
